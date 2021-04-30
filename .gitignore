@@ -1,0 +1,7 @@
+.idea
+.vscode
+.env
+
+build
+node_modules
+deployRecord
