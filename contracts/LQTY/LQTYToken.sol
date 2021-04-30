@@ -140,9 +140,9 @@ contract LQTYToken is CheckContract, ILQTYToken {
         lpRewardsEntitlement = _lpRewardsEntitlement;
         _mint(_lpRewardsAddress, _lpRewardsEntitlement);
 
-        // Team and investor entitlement
-        uint teamAndInvertorEntitlement = _1_MILLION.mul(25);  // Allocate 25 million for team and investor
-        _mint(_halflifeAddress, teamAndInvertorEntitlement);
+        // Team entitlement
+        uint teamEntitlement = _1_MILLION.mul(25);  // Allocate 25 million for team
+        _mint(_halflifeAddress, teamEntitlement);
 
         // Liquity official community entitlement
         uint liquityOfficialCommunityEntitlement = _1_MILLION.mul(10);  // Allocate 10 million for Liquity official community
