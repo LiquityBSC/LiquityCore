@@ -26,7 +26,7 @@ const chainLinkAddress = "0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE";
 const bandAddress = "0xDA7a001b254CD22e46d3eAB04d937489c93174C3";
 
 const teamHalflifeAdmin = "";
-const multisigAddressForLOC = "";
+const multisigAddressForLO = "";
 const multisigAddressForCC = "";
 const multisigAddressForLBSC = "";
 
@@ -125,7 +125,7 @@ module.exports = async function (deployer, network) {
     lqtyStaking.address,
     lusdUnipool.address,
     lockInHalflife.address,
-    multisigAddressForLOC,
+    multisigAddressForLO,
     multisigAddressForCC,
     multisigAddressForLBSC
     );

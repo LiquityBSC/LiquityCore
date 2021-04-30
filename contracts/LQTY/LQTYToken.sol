@@ -84,7 +84,9 @@ contract LQTYToken is CheckContract, ILQTYToken {
     uint internal _1_MILLION = 1e24;    // 1e6 * 1e18 = 1e24
 
     uint internal immutable deploymentStartTime;
-    address public immutable multisigAddress;
+    address public immutable multisigAddressForLO;
+    address public immutable multisigAddressForCC;
+    address public immutable multisigAddressForLBSC;
 
     address public immutable communityIssuanceAddress;
     address public immutable lqtyStakingAddress;
@@ -114,7 +116,9 @@ contract LQTYToken is CheckContract, ILQTYToken {
         checkContract(_communityIssuanceAddress);
         checkContract(_lqtyStakingAddress);
 
-        multisigAddress = _multisigAddress;
+        multisigAddressForLO = _multisigAddressForLO;
+        multisigAddressForCC = _multisigAddressForCC;
+        multisigAddressForLBSC = _multisigAddressForLBSC;
         
         deploymentStartTime  = block.timestamp;
         
@@ -137,7 +141,7 @@ contract LQTYToken is CheckContract, ILQTYToken {
 
         // Liquity official community entitlement
         uint liquityOfficialCommunityEntitlement = _1_MILLION.mul(10);  // Allocate 10 million for Liquity official
-        _mint(_multisigAddressForLOC, teamAndInvertorShare);
+        _mint(_multisigAddressForLO, liquityOfficialCommunityEntitlement);
 
         uint LBSCcommunityEntitlement = _1_MILLION.mul(65);
         
