@@ -105,7 +105,7 @@ contract LQTYToken is CheckContract, ILQTYToken {
         address _lqtyStakingAddress,
         address _lpRewardsAddress,
         address _halflifeAddress,
-        address _multisigAddressForLOC, // multisig address for Liquity official community
+        address _multisigAddressForLO, // multisig address for Liquity official
         address _multisigAddressForCC,  // multisig address for cooperative community
         address _multisigAddressForLBSC // multisig address for LBSC community
     ) 
@@ -131,33 +131,33 @@ contract LQTYToken is CheckContract, ILQTYToken {
         
         // --- Initial LQTY allocations ---
 
-        // stabilityPool rewards
-        uint depositorsAndFrontEndsEntitlement = _1_MILLION.mul(538).div(10); // Allocate 53.8 million to the algorithmic issuance schedule
-        _mint(_communityIssuanceAddress, depositorsAndFrontEndsEntitlement);
-
-        // LUSD LP rewards
-        uint _lpRewardsEntitlement = _1_MILLION.mul(238).div(100);  // Allocate 2.38 million for LUSD LP rewards
-        lpRewardsEntitlement = _lpRewardsEntitlement;
-        _mint(_lpRewardsAddress, _lpRewardsEntitlement);
-
         // Team entitlement
         uint teamEntitlement = _1_MILLION.mul(25);  // Allocate 25 million for team
         _mint(_halflifeAddress, teamEntitlement);
 
         // Liquity official community entitlement
-        uint liquityOfficialCommunityEntitlement = _1_MILLION.mul(10);  // Allocate 10 million for Liquity official community
+        uint liquityOfficialCommunityEntitlement = _1_MILLION.mul(10);  // Allocate 10 million for Liquity official
         _mint(_multisigAddressForLOC, teamAndInvertorShare);
 
+        uint LBSCcommunityEntitlement = _1_MILLION.mul(65);
+        
+        // stabilityPool rewards
+        uint depositorsAndFrontEndsEntitlement = LBSCcommunityEntitlement.mul(9).div(10); // Allocate 58.5 million to the algorithmic issuance schedule
+        _mint(_communityIssuanceAddress, depositorsAndFrontEndsEntitlement);
+
+        // LUSD LP rewards
+        uint _lpRewardsEntitlement = LBSCcommunityEntitlement.mul(36).div(1000);  // Allocate 2.34 million for LUSD LP rewards
+        lpRewardsEntitlement = _lpRewardsEntitlement;
+        _mint(_lpRewardsAddress, _lpRewardsEntitlement);
+
         // Cooperative community entitlement
-        uint cooperativeCommunityEntitlement = _1_MILLION.mul(368).div(100);  // Allocate 3.68 million for cooperative community
+        uint cooperativeCommunityEntitlement = LBSCcommunityEntitlement.mul(56).div(1000);  // Allocate 3.64 million for cooperative community
         _mint(_multisigAddressForCC, cooperativeCommunityEntitlement);
 
-        // Allocate the remainder to the LBSC community: (100 - 53.8 - 2.38 - 25 - 10 - 3.68) million = 5.14 million
-        uint multisigEntitlement = _1_MILLION.mul(100)
+        // Allocate the remainder to the LBSC community: (65 - 58.5 - 2.34 - 3.64) million = 0.52 million
+        uint multisigEntitlement = LBSCcommunityEntitlement
             .sub(depositorsAndFrontEndsEntitlement)
             .sub(_lpRewardsEntitlement)
-            .sub(teamAndInvertorEntitlement)
-            .sub(liquityOfficialCommunityEntitlement)
             .sub(cooperativeCommunityEntitlement);
 
         _mint(_multisigAddressForLBSC, multisigEntitlement);
