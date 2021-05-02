@@ -14,7 +14,7 @@ contract LockInHalflife is Ownable {
     IXHalfLife public halflife;
     ILQTYToken public LQTY;
 
-    uint256 public constant halflifeK = 6000;
+    uint256 public constant halflifeK = 13800;
     uint256 public constant halflifeRatio = 1;
     address public constant burnAddress = address(0x000000000000000000000000000000000000dEaD);
 
